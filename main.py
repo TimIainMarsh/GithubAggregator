@@ -1,4 +1,4 @@
-import urllib.request
+import urllib.request, base64
 from bs4 import BeautifulSoup
 import json
 
@@ -22,14 +22,19 @@ def readUsers(URL):
 
 Users = Users(0)
 
+password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+
+
+
 while Users.lastid <= 45:
 	startURL = 'https://api.github.com/users?since=' + str(Users.lastid)
 	UsersList,lastid = readUsers(startURL)
 	Users.lastid = lastid
 	for user in UsersList:
 		Users[user] = Repos(user)
+		
 
 
 for i,j in Users.items():
-	print (j.userName)
+	print (i+ ' ' +str(j.numberOfrepos))
 
