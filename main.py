@@ -1,20 +1,15 @@
 
 from urllib.request import build_opener, HTTPSHandler, HTTPError, Request
 from urllib.parse import quote as urlquote
-
-import base64
-
+import base64, json
 from bs4 import BeautifulSoup
-import json
 
-from users import Users
-from users import user
+from users import Users, user
 from AuthoRequest import AuthoRequest
 
 
 
 def readUsers(URL):
-
 	the_page = AuthoRequest(URL)
 
 	soup = BeautifulSoup(the_page, "html5lib")
@@ -24,8 +19,6 @@ def readUsers(URL):
 		USERS.append(i['login'])
 	lastid = usersJson[len(usersJson)-1]['id']
 	return USERS, lastid
-
-
 
 Users = Users(0)
 # while Users.lastid <= 45:
@@ -41,6 +34,8 @@ Users['jasrusable'] = user('jasrusable')
 Users['CraigNielsen'] = user('CraigNielsen')
 Users['avoid3d'] = user('avoid3d')
 
-for i,j in Users.items():
-	print ( str(j.name) + "  " + str(j.public_repos) )
+for uname,user in Users.items():
+	print ( str(user.name) + "  " + str(user.public_repos) )
+	for repoN, repo in user.Repos.items():
+		print ('--'+str(repo.repoName)+' '+repo.language)
 
