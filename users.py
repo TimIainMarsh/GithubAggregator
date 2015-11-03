@@ -9,20 +9,21 @@ class Users(dict):
 		self.lastid = lastid
 
 
-class Repos(dict):
+class user(object):
 	def __init__(self,userName):
 		self.userName = userName
-		# self.getRepos(userName)
-		self.numberOfrepos = self.getRepos(userName)
+		self.userJson = self.getUserJson(userName)
+		self.parseJson()
 
-	def getRepos(self,userName):
-		repoURL = 'https://api.github.com/users/' + userName+'/repos'
-		
+
+	def getUserJson(self,userName):
+		repoURL = 'https://api.github.com/users/' + userName
 		the_page = AuthoRequest(repoURL)
-
 		soup = BeautifulSoup(the_page, "html5lib")
 		reposJson = json.loads(soup.get_text())
+		return(reposJson)
 
-		return(len(reposJson))
-		# print(reposJson[1]['name'])
-
+	def parseJson(self):
+		self.name = self.userJson['name']
+		self.public_repos = self.userJson['public_repos']
+		self.hireable = self.userJson['hireable']

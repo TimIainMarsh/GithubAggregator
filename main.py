@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import json
 
 from users import Users
-from users import Repos
+from users import user
 from AuthoRequest import AuthoRequest
 
 def readUsers(URL):
@@ -26,15 +26,19 @@ def readUsers(URL):
 
 
 Users = Users(0)
-while Users.lastid <= 45:
-	startURL = 'https://api.github.com/users?since=' + str(Users.lastid)
-	UsersList,lastid = readUsers(startURL)
-	Users.lastid = lastid
-	for user in UsersList:
-		Users[user] = Repos(user)
+# while Users.lastid <= 45:
+# 	startURL = 'https://api.github.com/users?since=' + str(Users.lastid)
+# 	UsersList,lastid = readUsers(startURL)
+# 	Users.lastid = lastid
+# 	for item in UsersList:
+# 		Users[item] = user(item)
 		
 
-Users['TimIainMarsh'] = Repos('TimIainMarsh')
+Users['TimIainMarsh'] = user('TimIainMarsh')
+Users['jasrusable'] = user('jasrusable')
+Users['CraigNielsen'] = user('CraigNielsen')
+Users['avoid3d'] = user('avoid3d')
+
 for i,j in Users.items():
-	print (i+ ' ' +str(j.numberOfrepos))
+	print ( str(j.name) + "  " + str(j.public_repos) )
 
