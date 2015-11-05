@@ -1,7 +1,6 @@
-
+import base64, json
 from urllib.request import build_opener, HTTPSHandler, HTTPError, Request
 from urllib.parse import quote as urlquote
-import base64, json
 from bs4 import BeautifulSoup
 
 from users import Users, user
