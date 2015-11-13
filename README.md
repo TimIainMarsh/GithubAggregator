@@ -1,2 +1,2 @@
-# GitScraper
-Github API Scraper
+# GithubAggregator
+Github API Aggregator
